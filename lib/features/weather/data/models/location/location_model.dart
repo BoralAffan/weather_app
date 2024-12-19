@@ -47,4 +47,10 @@ class LocationModel extends LocationEntity{
             localtimeEpoch: localtimeEpoch ?? this.localtimeEpoch,
             localtime: localtime ?? this.localtime,
         );
+
+        
+  factory LocationModel.fromJson(Map<String, dynamic> json) =>
+      _$LocationModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LocationModelToJson(this);
 }
