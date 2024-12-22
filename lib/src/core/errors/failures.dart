@@ -6,3 +6,4 @@ sealed class Failure extends Equatable {
 }
 
 class ServerFailure extends Failure {}
+class UnexpectedFailure extends Failure {}

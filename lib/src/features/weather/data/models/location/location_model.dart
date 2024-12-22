@@ -7,14 +7,14 @@ part 'location_model.g.dart';
 
 @JsonSerializable()
 class LocationModel extends LocationEntity{
-   String name;
-    String region;
-    String country;
-    double lat;
-    double lon;
-    String tzId;
-    int localtimeEpoch;
-    String localtime;
+    String? name;
+    String? region;
+    String? country;
+    double? lat;
+    double? lon;
+    String? tzId;
+    int   ? localtimeEpoch;
+    String? localtime;
 
     LocationModel({
         required this.name,
@@ -25,7 +25,7 @@ class LocationModel extends LocationEntity{
         required this.tzId,
         required this.localtimeEpoch,
         required this.localtime,
-    }) : super(name: name, region: region, country: country, lat: lat, lon: lon, tzId: tzId, localtime: localtime);
+    }) : super(name: name??null, region: region?? null, country: country, lat: lat, lon: lon, tzId: tzId, localtime: localtime);
 
     LocationModel copyWith({
         String? name,

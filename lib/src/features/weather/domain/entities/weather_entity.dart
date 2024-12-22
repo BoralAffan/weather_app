@@ -4,9 +4,9 @@ import 'package:weather_app/src/features/weather/domain/entities/location_entity
 import 'package:equatable/equatable.dart';
 
 class WeatherEntity extends Equatable {
-  final LocationEntity location;
-  final CurrentWeatherEntity current;
-  final  ForecastDayEntity  forecast;
+  final LocationEntity? location;
+  final CurrentWeatherEntity? current;
+  final  ForecastDayEntity?  forecast;
 
   const WeatherEntity({
     required this.location,

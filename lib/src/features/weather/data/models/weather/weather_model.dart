@@ -11,22 +11,22 @@ part 'weather_model.g.dart';
 @JsonSerializable()
 class WeatherModel extends WeatherEntity {
   @JsonKey(name: 'location')
-  final LocationModel location;
+  final LocationModel? location;
 
   @JsonKey(name: 'current')
-  final CurrentWeatherModel current;
+  final CurrentWeatherModel? current;
 
   @JsonKey(name: 'forecast')
-  final ForecastDayModel forecast;
+  final ForecastDayModel? forecast;
 
   const WeatherModel({
     required this.location,
     required this.current,
     required this.forecast,
   }) : super(
-          location: location,
-          current: current,
-          forecast: forecast,
+          location: location?? null,
+          current: current?? null,
+          forecast: forecast?? null,
         );
 
   factory WeatherModel.fromJson(Map<String, dynamic> json) =>
