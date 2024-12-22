@@ -1,14 +1,14 @@
 import 'package:equatable/equatable.dart';
 
 class AqiEntity extends Equatable {
-  final double co;  
-  final double no2;  
-  final double o3;  
-  final double so2;  
-  final double pm2_5;  
-  final double pm10;  
-  final int usEpaIndex;  
-  final int gbDefraIndex;  
+  final double? co;  
+  final double? no2;  
+  final double? o3;  
+  final double? so2;  
+  final double? pm2_5;  
+  final double? pm10;  
+  final int? usEpaIndex;  
+  final int? gbDefraIndex;  
 
   AqiEntity({
     required this.co,

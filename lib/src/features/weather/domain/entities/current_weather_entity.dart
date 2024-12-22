@@ -3,37 +3,41 @@ import 'package:weather_app/src/features/weather/domain/entities/aqi_entity.dart
 import 'package:weather_app/src/features/weather/domain/entities/condition_entity.dart';
  
 class CurrentWeatherEntity extends Equatable {
-  final int lastUpdatedEpoch;
-  final String lastUpdated;
-  final double tempC;
-  final double tempF;
-  final int isDay;
-  final ConditionEntity condition;
-  final double windMph;
-  final double windKph;
-  final int windDegree;
-  final String windDir;
-  final double pressureMb;
-  final double pressureIn;
-  final double precipMm;
-  final double precipIn;
-  final int humidity;
-  final int cloud;
-  final double feelslikeC;
-  final double feelslikeF;
-  final double windchillC;
-  final double windchillF;
-  final double heatindexC;
-  final double heatindexF;
-  final double dewpointC;
-  final double dewpointF;
-  final double visKm;
-  final double visMiles;
-  final double uv;
-  final double gustMph;
-  final double gustKph;
-  final AqiEntity airQuality;
-
+  final int? lastUpdatedEpoch;
+  final String? lastUpdated;
+  final double? tempC;
+  final double? tempF;
+  final int? isDay;
+  final ConditionEntity? condition;
+  final double? windMph;
+  final double? windKph;
+  final    int? windDegree;
+  final String? windDir;
+  final double? pressureMb;
+  final double? pressureIn;
+  final double? precipMm;
+  final double? precipIn;
+  final    int? humidity;
+  final    int? cloud;
+  final double? feelslikeC;
+  final double? feelslikeF;
+  final double? windchillC;
+  final double? windchillF;
+  final double? heatindexC;
+  final double? heatindexF;
+  final double? dewpointC;
+  final double? dewpointF;
+  final double? maxTempC;
+ 
+  final double? minTempC;
+ 
+  final double? visKm;
+  final double? visMiles;
+  final double? uv;
+  final double? gustMph;
+  final double? gustKph;
+  final AqiEntity? airQuality;
+     
   const CurrentWeatherEntity({
     required this.lastUpdatedEpoch,
     required this.lastUpdated,
@@ -65,6 +69,10 @@ class CurrentWeatherEntity extends Equatable {
     required this.gustMph,
     required this.gustKph,
     required this.airQuality,
+    required this.minTempC,
+     required this.maxTempC,
+    
+    
   });
 
   @override
@@ -99,5 +107,7 @@ class CurrentWeatherEntity extends Equatable {
         gustMph,
         gustKph,
         airQuality,
+        minTempC,
+         maxTempC, 
       ];
 }

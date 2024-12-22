@@ -7,7 +7,7 @@ part 'forecast_day_model.g.dart';
 @JsonSerializable()
 class ForecastDayModel extends ForecastDayEntity {
   @JsonKey(name: 'forecastday')
-  final List<ForecastModel> forecastday;
+  final List<ForecastModel>? forecastday;
 
  
   const ForecastDayModel({

@@ -9,16 +9,16 @@ part 'forecast_model.g.dart';
 @JsonSerializable()
 class ForecastModel extends ForecastEntity {
   @JsonKey(name: 'date')
-  final String date;
+  final String? date;
 
   @JsonKey(name: 'date_epoch')
-  final int dateEpoch;
+  final int? dateEpoch;
 
   @JsonKey(name: 'day')
-  final CurrentWeatherModel day;
+  final CurrentWeatherModel? day;
 
   @JsonKey(name: 'hour')
-  final List<HourlyForecastModel> hour;
+  final List<HourlyForecastModel>? hour;
 
   const ForecastModel({
     required this.date,

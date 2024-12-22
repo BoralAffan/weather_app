@@ -8,8 +8,8 @@ part of 'forecast_day_model.dart';
 
 ForecastDayModel _$ForecastDayModelFromJson(Map<String, dynamic> json) =>
     ForecastDayModel(
-      forecastday: (json['forecastday'] as List<dynamic>)
-          .map((e) => ForecastModel.fromJson(e as Map<String, dynamic>))
+      forecastday: (json['forecastday'] as List<dynamic>?)
+          ?.map((e) => ForecastModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

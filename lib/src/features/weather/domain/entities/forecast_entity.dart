@@ -3,10 +3,10 @@ import 'package:weather_app/src/features/weather/domain/entities/current_weather
 import 'package:weather_app/src/features/weather/domain/entities/hourly_forecast_entity.dart';
 
 class ForecastEntity extends Equatable {
-  final String date;
-  final int dateEpoch;
-  final CurrentWeatherEntity day;
-  final List<HourlyForecastEntity> hour;
+  final String? date;
+  final int? dateEpoch;
+  final CurrentWeatherEntity? day;
+  final List<HourlyForecastEntity>? hour;
 
   const ForecastEntity({
     required this.date,

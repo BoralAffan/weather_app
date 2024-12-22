@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/src/core/utils/image_paths.dart';
 
-class Location extends StatelessWidget {
-   Location({super.key});
+class LocationWidget extends StatelessWidget {
+  String city;
+  String date;
+   LocationWidget({super.key, required this.city, required this.date});
   
   @override
   Widget build(BuildContext context) {
@@ -14,8 +16,8 @@ class Location extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              // controller.getAddress(),
-              'Mumbai',
+           
+             city,
               style: const TextStyle(
                   height: 0,
                   color: Colors.black,
@@ -23,8 +25,7 @@ class Location extends StatelessWidget {
                   fontSize: 25),
             ),
             Text(
-              // Utils.formateDate(DateTime.now()),
-              '24, July',
+              date,
               style: TextStyle(
                   color: Colors.grey.withOpacity(.7),
                   fontWeight: FontWeight.bold),

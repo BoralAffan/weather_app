@@ -8,9 +8,9 @@ part of 'condition_model.dart';
 
 ConditionModel _$ConditionModelFromJson(Map<String, dynamic> json) =>
     ConditionModel(
-      text: json['text'] as String,
-      icon: json['icon'] as String,
-      code: (json['code'] as num).toInt(),
+      text: json['text'] as String?,
+      icon: json['icon'] as String?,
+      code: (json['code'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$ConditionModelToJson(ConditionModel instance) =>

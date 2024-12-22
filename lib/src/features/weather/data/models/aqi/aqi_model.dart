@@ -5,16 +5,16 @@ part 'aqi_model.g.dart';
 
 @JsonSerializable()
 class AqiModel extends AqiEntity {
-  final double co;
-  final double no2;
-  final double o3;
-  final double so2;
-  final double pm2_5;
-  final double pm10;
+  final double? co;
+  final double? no2;
+  final double? o3;
+  final double? so2;
+  final double? pm2_5;
+  final double? pm10;
   @JsonKey(name: 'us-epa-index')
-  final int usEpaIndex;
+  final int? usEpaIndex;
   @JsonKey(name: 'gb-defra-index')
-  final int gbDefraIndex;
+  final int? gbDefraIndex;
 
   AqiModel({
     required this.co,

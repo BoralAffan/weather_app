@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-class SmallContainer extends StatefulWidget {
-  const SmallContainer({super.key,required this.text,required this.image, this.color,this.textColor});
+class InfoChipContainerWiget extends StatefulWidget {
+  const InfoChipContainerWiget({super.key,required this.text,required this.image, this.color,this.textColor});
   final String text;
   final String image;
   final Color? color;
   final Color? textColor;
 
   @override
-  State<SmallContainer> createState() => _SmallContainerState();
+  State<InfoChipContainerWiget> createState() => _InfoChipContainerWigetState();
 }
 
-class _SmallContainerState extends State<SmallContainer> {
+class _InfoChipContainerWigetState extends State<InfoChipContainerWiget> {
   @override
   Widget build(BuildContext context) {
     return Column(

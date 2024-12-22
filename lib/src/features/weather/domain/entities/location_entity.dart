@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 
 class LocationEntity extends Equatable {
-  final String name;
-  final String region;
-  final String country;
-  final double lat;
-  final double lon;
-  final String tzId;
-  final String localtime;
+  final String? name;
+  final String? region;
+  final String? country;
+  final double? lat;
+  final double? lon;
+  final String? tzId;
+  final String? localtime;
 
   const LocationEntity({
     required this.name,

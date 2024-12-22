@@ -9,109 +9,109 @@ part 'hourly_forecast_model.g.dart';
 @JsonSerializable()
 class HourlyForecastModel extends HourlyForecastEntity {
   @JsonKey(name: 'time_epoch')
-  final int timeEpoch;
+  final int? timeEpoch;
   
   @JsonKey(name: 'time')
-  final String time;
+  final String? time;
   
   @JsonKey(name: 'temp_c')
-  final double tempC;
+  final double? tempC;
   
   @JsonKey(name: 'temp_f')
-  final double tempF;
+  final double? tempF;
   
   @JsonKey(name: 'is_day')
-  final int isDay;
+  final int? isDay;
   
   @JsonKey(name: 'condition')
-  final ConditionModel condition;
+  final ConditionModel? condition;
   
   @JsonKey(name: 'wind_mph')
-  final double windMph;
+  final double? windMph;
   
   @JsonKey(name: 'wind_kph')
-  final double windKph;
+  final double? windKph;
   
   @JsonKey(name: 'wind_degree')
-  final int windDegree;
+  final int? windDegree;
   
   @JsonKey(name: 'wind_dir')
-  final String windDir;
+  final String? windDir;
   
   @JsonKey(name: 'pressure_mb')
-  final double pressureMb;
+  final double? pressureMb;
   
   @JsonKey(name: 'pressure_in')
-  final double pressureIn;
+  final double? pressureIn;
   
   @JsonKey(name: 'precip_mm')
-  final double precipMm;
+  final double? precipMm;
   
   @JsonKey(name: 'precip_in')
-  final double precipIn;
+  final double? precipIn;
   
   @JsonKey(name: 'snow_cm')
-  final double snowCm;
+  final double? snowCm;
   
   @JsonKey(name: 'humidity')
-  final int humidity;
+  final int? humidity;
   
   @JsonKey(name: 'cloud')
-  final int cloud;
+  final int? cloud;
   
   @JsonKey(name: 'feelslike_c')
-  final double feelslikeC;
+  final double? feelslikeC;
   
   @JsonKey(name: 'feelslike_f')
-  final double feelslikeF;
+  final double? feelslikeF;
   
   @JsonKey(name: 'windchill_c')
-  final double windchillC;
+  final double? windchillC;
   
   @JsonKey(name: 'windchill_f')
-  final double windchillF;
+  final double? windchillF;
   
   @JsonKey(name: 'heatindex_c')
-  final double heatindexC;
+  final double? heatindexC;
   
   @JsonKey(name: 'heatindex_f')
-  final double heatindexF;
+  final double? heatindexF;
   
   @JsonKey(name: 'dewpoint_c')
-  final double dewpointC;
+  final double? dewpointC;
   
   @JsonKey(name: 'dewpoint_f')
-  final double dewpointF;
+  final double? dewpointF;
   
   @JsonKey(name: 'will_it_rain')
-  final int willItRain;
+  final int ? willItRain;
   
   @JsonKey(name: 'chance_of_rain')
-  final int chanceOfRain;
+  final int ? chanceOfRain;
   
   @JsonKey(name: 'will_it_snow')
-  final int willItSnow;
+  final int? willItSnow;
   
   @JsonKey(name: 'chance_of_snow')
-  final int chanceOfSnow;
+  final int? chanceOfSnow;
   
   @JsonKey(name: 'vis_km')
-  final double visKm;
+  final double? visKm;
   
   @JsonKey(name: 'vis_miles')
-  final double visMiles;
+  final double? visMiles;
   
   @JsonKey(name: 'gust_mph')
-  final double gustMph;
+  final double? gustMph;
   
   @JsonKey(name: 'gust_kph')
-  final double gustKph;
+  final double? gustKph;
   
   @JsonKey(name: 'uv')
-  final double uv;
+  final double? uv;
   
   @JsonKey(name: 'air_quality')
-  final AqiModel airQuality;
+  final AqiModel? airQuality;
 
   const HourlyForecastModel({
     required this.timeEpoch,
@@ -150,41 +150,41 @@ class HourlyForecastModel extends HourlyForecastEntity {
     required this.uv,
     required this.airQuality,
   }) : super(
-          timeEpoch: timeEpoch,
-          time: time,
-          tempC: tempC,
-          tempF: tempF,
-          isDay: isDay,
-          condition: condition,
-          windMph: windMph,
-          windKph: windKph,
-          windDegree: windDegree,
-          windDir: windDir,
-          pressureMb: pressureMb,
-          pressureIn: pressureIn,
-          precipMm: precipMm,
-          precipIn: precipIn,
-          snowCm: snowCm,
-          humidity: humidity,
-          cloud: cloud,
-          feelslikeC: feelslikeC,
-          feelslikeF: feelslikeF,
-          windchillC: windchillC,
-          windchillF: windchillF,
-          heatindexC: heatindexC,
-          heatindexF: heatindexF,
-          dewpointC: dewpointC,
-          dewpointF: dewpointF,
-          willItRain: willItRain,
-          chanceOfRain: chanceOfRain,
-          willItSnow: willItSnow,
-          chanceOfSnow: chanceOfSnow,
-          visKm: visKm,
-          visMiles: visMiles,
-          gustMph: gustMph,
-          gustKph: gustKph,
-          uv: uv,
-          airQuality: airQuality,
+          timeEpoch:        timeEpoch ??null,
+          time:                  time ??null,
+          tempC:                tempC ??null,
+          tempF:                tempF ??null,
+          isDay:                isDay ??null,
+          condition:        condition ??null,
+          windMph:            windMph ??null,
+          windKph:            windKph ??null,
+          windDegree:      windDegree ??null,
+          windDir:            windDir ??null,
+          pressureMb:      pressureMb ??null,
+          pressureIn:      pressureIn ??null,
+          precipMm:          precipMm ??null,
+          precipIn:          precipIn ??null,
+          snowCm:              snowCm ??null,
+          humidity:          humidity ??null,
+          cloud:                cloud ??null,
+          feelslikeC:      feelslikeC ??null,
+          feelslikeF:      feelslikeF ??null,
+          windchillC:      windchillC ??null,
+          windchillF:      windchillF ??null,
+          heatindexC:      heatindexC ??null,
+          heatindexF:      heatindexF ??null,
+          dewpointC:        dewpointC ??null,
+          dewpointF:        dewpointF ??null,
+          willItRain:       willItRain ??null,
+          chanceOfRain:   chanceOfRain ??null,
+          willItSnow:       willItSnow ??null,
+          chanceOfSnow:   chanceOfSnow ??null,
+          visKm:                 visKm ??null,
+          visMiles:           visMiles ??null,
+          gustMph:             gustMph ??null,
+          gustKph:             gustKph ??null,
+          uv:                       uv ??null,
+          airQuality:       airQuality ??null,
         );
 
   factory HourlyForecastModel.fromJson(Map<String, dynamic> json) =>

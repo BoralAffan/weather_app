@@ -6,9 +6,9 @@ part 'condition_model.g.dart';
 
 @JsonSerializable()
 class ConditionModel extends ConditionEntity  {
-      final String text;
-    final String icon;
-   final  int code;
+      final String? text;
+    final String? icon;
+   final  int? code;
 
     ConditionModel({
         required this.text,

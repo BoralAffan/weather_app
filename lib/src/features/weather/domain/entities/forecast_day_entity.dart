@@ -4,7 +4,7 @@ import 'package:weather_app/src/features/weather/domain/entities/forecast_entity
  
 class ForecastDayEntity extends Equatable {
  
-  final List<ForecastEntity> forecasts;
+  final List<ForecastEntity>? forecasts;
 
   const ForecastDayEntity({
  

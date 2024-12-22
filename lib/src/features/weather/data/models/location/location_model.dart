@@ -13,7 +13,7 @@ class LocationModel extends LocationEntity{
     double? lat;
     double? lon;
     String? tzId;
-    int   ? localtimeEpoch;
+    int? localtimeEpoch;
     String? localtime;
 
     LocationModel({
@@ -25,7 +25,7 @@ class LocationModel extends LocationEntity{
         required this.tzId,
         required this.localtimeEpoch,
         required this.localtime,
-    }) : super(name: name??null, region: region?? null, country: country, lat: lat, lon: lon, tzId: tzId, localtime: localtime);
+    }) : super(name: name, region: region, country: country, lat: lat, lon: lon, tzId: tzId, localtime: localtime);
 
     LocationModel copyWith({
         String? name,

@@ -8,11 +8,13 @@ part of 'forecast_model.dart';
 
 ForecastModel _$ForecastModelFromJson(Map<String, dynamic> json) =>
     ForecastModel(
-      date: json['date'] as String,
-      dateEpoch: (json['date_epoch'] as num).toInt(),
-      day: CurrentWeatherModel.fromJson(json['day'] as Map<String, dynamic>),
-      hour: (json['hour'] as List<dynamic>)
-          .map((e) => HourlyForecastModel.fromJson(e as Map<String, dynamic>))
+      date: json['date'] as String?,
+      dateEpoch: (json['date_epoch'] as num?)?.toInt(),
+      day: json['day'] == null
+          ? null
+          : CurrentWeatherModel.fromJson(json['day'] as Map<String, dynamic>),
+      hour: (json['hour'] as List<dynamic>?)
+          ?.map((e) => HourlyForecastModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

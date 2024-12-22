@@ -16,12 +16,13 @@ class WeatherRemoteDataSourceImpl extends WeatherRemoteDataSource {
       print('calling here');
       WeatherModel weather;
       var response = await client.get(
-        'http://api.weatherapi.com/v1/forecast.json?key=b9d8e18b8dad456b918140126241912&q=${city}&days=2&aqi=yes&alerts=no');
+        'http://api.weatherapi.com/v1/forecast.json?key=b9d8e18b8dad456b918140126241912&q=${city}&days=7&aqi=yes&alerts=no');
 
 print('response data ${response.data}');
-if(response.statusCode==200){
+ if(response.statusCode==200){
 weather = WeatherModel.fromJson(response.data);
-print('response data json ${weather}');
+// print('response data json ${weather}');
+ 
 
 return weather;
 }      throw ServerException();
