@@ -2,6 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:weather_app/src/core/errors/exceptions.dart';
 import 'package:weather_app/src/core/errors/failures.dart';
 import 'package:weather_app/src/features/weather/data/datasource/weather_remote_data_source.dart';
+import 'package:weather_app/src/features/weather/data/models/city_suggestion/city_suggestion_model.dart';
+import 'package:weather_app/src/features/weather/data/models/ip_location/ip_location_model.dart';
 import 'package:weather_app/src/features/weather/data/models/weather/weather_model.dart';
 import 'package:weather_app/src/features/weather/domain/repositories/weather_repository.dart';
 
@@ -16,9 +18,18 @@ class WeatherRepositoryImpl extends WeatherRepository {
       
        return Right(weather);
     } on ServerException {
-       return Left(ServerFailure());
+       return Left(ServerFailure(error: 'something went werong'));
     } catch (e) {
        return Left(UnexpectedFailure());
     }
   }
+   @override
+  Future<IPLocation> fetchLocationByIP() async {
+    return await remoteDataSource.fetchLocationByIP();
+  }
+
+  //   @override
+  // Future<List<CitySuggestionModel>> getCitySuggestions(String city) async {
+  //   return await remoteDataSource.getCitySuggestions(city);
+  // }
 }

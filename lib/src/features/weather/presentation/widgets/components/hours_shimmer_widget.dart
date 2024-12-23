@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:weather_app/src/core/utils/app_colors.dart';
 
@@ -9,7 +10,7 @@ class HoursShimmerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       
-      height: 180,
+      height: 180.h,
       child: ListView.builder(
         itemCount: 10,
         scrollDirection: Axis.horizontal,
@@ -27,11 +28,11 @@ class HoursShimmerWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(50),
                   ),
                   child: Container(
-                    height: 130,
-                    width: 80,
+                    height: 120.h,
+                    width: 70.w,
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
-                      color: Colors.grey[300],
+                      color: AppColors.greyColor,
                       borderRadius: BorderRadius.circular(50),
                     ),
                     child: Column(
@@ -41,14 +42,14 @@ class HoursShimmerWidget extends StatelessWidget {
                         Container(
                           height: 15,
                           width: 20,
-                          color: Colors.grey[300],
+                          color: AppColors.greyColor,
                         ),
                         // Placeholder for the image/icon
                         Container(
                           height: 50,
                           width: 50,
                           decoration: BoxDecoration(
-                            color: Colors.grey[300],
+                            color: AppColors.greyColor,
                             borderRadius: BorderRadius.circular(25),
                           ),
                         ),
@@ -56,7 +57,7 @@ class HoursShimmerWidget extends StatelessWidget {
                         Container(
                           height: 15,
                           width: 30,
-                          color: Colors.grey[300],
+                          color: AppColors.greyColor,
                         ),
                       ],
                     ),

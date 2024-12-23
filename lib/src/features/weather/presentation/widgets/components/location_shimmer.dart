@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:weather_app/src/core/utils/app_colors.dart';
 
@@ -19,9 +20,9 @@ class LocationShimmerWidget extends StatelessWidget {
                 baseColor: AppColors.greyColor,
                 highlightColor: AppColors.lightGreyColor,
                 child: Container(
-                  height: 20,
-                  width: 100,
-                  color: Colors.grey[300],
+                  height: 20.h,
+                  width: 100.w,
+                  color: AppColors.greyColor,
                 ),
               ),
               const SizedBox(height: 10),
@@ -29,16 +30,16 @@ class LocationShimmerWidget extends StatelessWidget {
                 baseColor: AppColors.greyColor,
                 highlightColor: AppColors.lightGreyColor,
                 child: Container(
-                  height: 15,
-                  width: 60,
-                  color: Colors.grey[300],
+                  height: 15.h,
+                  width: 60.w,
+                  color: AppColors.greyColor,
                 ),
               ),
             ],
           ),
            SizedBox(
-            height: 150,
-            width: 150,
+            height: 125.h,
+            width: 125.w,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical:10.0),
               child: Shimmer.fromColors(
@@ -47,7 +48,7 @@ class LocationShimmerWidget extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: Container(
-                    color: Colors.grey[300],
+                    color: AppColors.greyColor,
                   ),
                 ),
               ),

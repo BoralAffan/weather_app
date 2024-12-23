@@ -3,6 +3,10 @@ import 'package:dio/dio.dart';
 import 'package:weather_app/src/features/weather/data/datasource/weather_remote_data_source.dart';
 import 'package:weather_app/src/features/weather/data/repositories/weather_repository_impl.dart';
 import 'package:weather_app/src/features/weather/domain/repositories/weather_repository.dart';
+import 'package:weather_app/src/features/weather/domain/usecases/get_city_suggestion_usecase.dart';
+import 'package:weather_app/src/features/weather/domain/usecases/get_device_location_usecase.dart';
+import 'package:weather_app/src/features/weather/domain/usecases/get_location_by_ip_usecase.dart';
+import 'package:weather_app/src/features/weather/domain/usecases/get_location_permission_usecase.dart';
 import 'package:weather_app/src/features/weather/domain/usecases/get_weather_usecase.dart';
 import 'package:weather_app/src/features/weather/presentation/blocs/weather/weather_bloc.dart';
  
@@ -25,7 +29,11 @@ Future<void> init() async {
 
   // Use Cases
   sl.registerLazySingleton(() => GetWeatherUsecase(repository: sl()));
+    sl.registerLazySingleton(() => GetDeviceLocationUseCase());
+  sl.registerLazySingleton(() => GetLocationPermissionUseCase());
+  sl.registerLazySingleton(() => FetchLocationByIPUseCase(repository: sl()));
+  sl.registerLazySingleton(() => GetCitySuggestionsUseCase(weatherRepository: sl()));
 
   // Blocs
-  sl.registerFactory(() => WeatherBloc(getWeatherUseCase: sl()));
+  sl.registerFactory(() => WeatherBloc(getWeatherUseCase: sl(),getCitySuggestionsUseCase: sl()));
 }

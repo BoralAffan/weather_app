@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/src/core/utils/helpers.dart';
 
 class ForecastCard extends StatelessWidget {
@@ -16,7 +17,7 @@ class ForecastCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
+      height: 80.h,
       width: double.infinity,
       margin: EdgeInsets.all(2),
       decoration: BoxDecoration(
@@ -31,9 +32,12 @@ class ForecastCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              Helpers.formatDateToDayMonth(date),
-              style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+            Container(
+              width: 0.35.sw,
+               child: Text(
+                Helpers.formatDateToDayMonth(date),
+                style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+              ),
             ),
             RichText(
                 text: TextSpan(
@@ -41,14 +45,14 @@ class ForecastCard extends StatelessWidget {
                     style: TextStyle(
                         color: const Color.fromARGB(255, 192, 181, 181),
                         fontWeight: FontWeight.bold,
-                        fontSize: 20),
+                        fontSize: 18.sp),
                     children: [
                   TextSpan(
                     text: '${maxTemp}\u00B0',
                     style: TextStyle(
                         color: Colors.red,
                         fontWeight: FontWeight.bold,
-                        fontSize: 16),
+                        fontSize: 16.sp),
                   )
                 ])),
             Image.network('https:${imgUrl}')

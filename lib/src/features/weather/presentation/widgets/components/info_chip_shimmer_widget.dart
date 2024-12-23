@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:weather_app/src/core/utils/app_colors.dart';
 
@@ -14,22 +15,22 @@ class InfoChipShimmerWidget extends StatelessWidget {
           baseColor: AppColors.greyColor,
           highlightColor:  AppColors.lightGreyColor,
           child: Container(
-            height: 60,
-            width: 60,
+            height: 60.h,
+            width: 60.w,
             decoration: BoxDecoration(
               color: Colors.grey[300],
               borderRadius: BorderRadius.circular(20),
             ),
           ),
         ),
-        const SizedBox(height: 4),
+          SizedBox(height: 5.h),
         // Shimmer for the text
         Shimmer.fromColors(
           baseColor: AppColors.greyColor,
           highlightColor: AppColors.lightGreyColor,
           child: Container(
-            height: 15,
-            width: 50, 
+            height: 15.h,
+            width: 50.w, 
             color: AppColors.greyColor,
           ),
         ),

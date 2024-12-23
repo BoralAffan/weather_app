@@ -17,8 +17,7 @@ import 'package:weather_app/src/features/weather/domain/entities/hourly_forecast
         padding: const EdgeInsets.symmetric(vertical: 10),
         itemBuilder: (context, index) {
  
-          print('default ${Helpers.extractTime(forcasts[index].time??'')}'+"  "+"now ${currentTime.hour.toString()}");
-          return GestureDetector(
+           return GestureDetector(
             onTap: () => {},
             child: Column(    // for ignoring parent height
               children: [
