@@ -6,7 +6,7 @@ class FetchLocationByIPUseCase {
 
   FetchLocationByIPUseCase({required this.repository});
 
-  Future<IPLocation> execute() async {
+  Future<String> execute() async {
     return await repository.fetchLocationByIP();
   }
 }

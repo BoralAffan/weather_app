@@ -24,7 +24,7 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   TextEditingController _controller = TextEditingController();
-   @override
+  @override
   void dispose() {
     // TODO: implement dispose
     _controller.clear();
@@ -49,25 +49,47 @@ class _SearchPageState extends State<SearchPage> {
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 12.w),
                       child: Column(children: [
-                        TextField(
-                          controller: _controller,
-                          decoration: InputDecoration(
-                            labelText: 'Enter City',
-                            border: OutlineInputBorder(),
+                        Container(
+                          height: 50.h,
+                          width: 1.sw,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              boxShadow: [BoxShadow(blurRadius: 0.1)],
+                              borderRadius: BorderRadius.circular(10.r)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: TextField(
+                                    controller: _controller,
+                                    decoration: InputDecoration.collapsed(
+                                        hintText: 'Enter city'),
+                                    onChanged: (value) {},
+                                    onSubmitted: (value) {
+                                      widget.weatherBLoc.add(
+                                          FetchSearchedWeather(query: value));
+                                    },
+                                  ),
+                                ),
+                                IconButton(
+                                    onPressed: () {
+                                      if (_controller.text.isNotEmpty) {
+                                        widget.weatherBLoc.add(
+                                            FetchSearchedWeather(
+                                                query:
+                                                    _controller.text.trim()));
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                                content:
+                                                    Text('Please enter city')));
+                                      }
+                                    },
+                                    icon: Icon(Icons.search))
+                              ],
+                            ),
                           ),
-                          onChanged: (value) {
-                            // setState(() {
-                            //   _city = value;
-                            // });
-                            // if (_city.isNotEmpty) {
-                            //   widget.weatherBLoc
-                            //       .add(FetchCitySuggestions(query: _city));
-                            // }
-                          },
-                          onSubmitted: (value) {
-                             widget.weatherBLoc
-                                .add(FetchSearchedWeather(query: value));
-                          },
                         ),
                         _controller.text.isEmpty
                             ? SizedBox(
@@ -78,114 +100,80 @@ class _SearchPageState extends State<SearchPage> {
                                 ))
                             : state is SearchedWeatherLoading
                                 ? Column(
-                                    children: [   const LocationShimmerWidget(),
-                         Material(
-                                color: Colors.transparent,
-                                child: InfoCardShimmerWidget()),
-                        InfoListShimmerWidget(),
-                          SizedBox(
-                          height: 40.h,
-                        ),
-                          HoursShimmerWidget()],
+                                    children: [
+                                      const LocationShimmerWidget(),
+                                      Material(
+                                          color: Colors.transparent,
+                                          child: InfoCardShimmerWidget()),
+                                      InfoListShimmerWidget(),
+                                      SizedBox(
+                                        height: 40.h,
+                                      ),
+                                      HoursShimmerWidget()
+                                    ],
                                   )
-                                : state is SearchedWeatherError
-                                    ? SizedBox(
-                                        height: 0.75.sh,
-                                        width: 1.sw,
-                                        child: Center(
-                                          child: Text(
-                                              state.searchedWeatherError ??
-                                                  'something went wrong'),
-                                        ))
-                                    : state.searchedWeather != null
-                                        ? Column(
-                                            children: [
-                                              LocationWidget(
-                                                weatherBloc:
-                                                    context.read<WeatherBloc>(),
-                                                showUnderLineText: false,
-                                                city:
-                                                    '${state.searchedWeather?.location?.name} , ${state.searchedWeather?.location?.country}' ??
-                                                        '',
-                                                date: Helpers.formatDate(state
+                                : state.searchedWeather?.location != null
+                                    ? Column(
+                                        children: [
+                                          LocationWidget(
+                                            weatherBloc:
+                                                context.read<WeatherBloc>(),
+                                            showUnderLineText: false,
+                                            city:
+                                                '${state.searchedWeather?.location?.name} , ${state.searchedWeather?.location?.country}' ??
+                                                    '',
+                                            date: Helpers.formatDate(state
+                                                    .searchedWeather
+                                                    ?.location
+                                                    ?.localtime ??
+                                                ''),
+                                          ),
+                                          Material(
+                                              color: Colors.transparent,
+                                              child: InfoCard(
+                                                condition: state
                                                         .searchedWeather
-                                                        ?.location
-                                                        ?.localtime ??
-                                                    ''),
-                                              ),
-                                             Material(
-                                                      color: Colors.transparent,
-                                                      child: InfoCard(
-                                                        condition: state
-                                                                .searchedWeather
-                                                                ?.current
-                                                                ?.condition
-                                                                ?.text ??
-                                                            '',
-                                                        feelsLike: state
-                                                            .searchedWeather!
-                                                            .current!
-                                                            .feelslikeC
-                                                            .toString(),
-                                                        temp: state
-                                                            .searchedWeather!
-                                                            .current!
-                                                            .tempC
-                                                            .toString(),
-                                                        time: Helpers.extractTime(
-                                                            state
-                                                                    .searchedWeather!
-                                                                    .location!
-                                                                    .localtime ??
-                                                                ''),
-                                                      )),
-                                              InfoListWidget(
-                                                cloud: state.searchedWeather!
-                                                    .current!.cloud
+                                                        ?.current
+                                                        ?.condition
+                                                        ?.text ??
+                                                    '',
+                                                feelsLike: state
+                                                    .searchedWeather!
+                                                    .current!
+                                                    .feelslikeC
                                                     .toString(),
-                                                humidity: state.searchedWeather!
-                                                    .current!.humidity
+                                                temp: state.searchedWeather!
+                                                    .current!.tempC
                                                     .toString(),
-                                                wind: state.searchedWeather!
-                                                    .current!.windKph!
-                                                    .toString(),
-                                              ),
-                                              SizedBox(
-                                                height: 20.h,
-                                              ),
-                                              GestureDetector(
-                                                onTap: () => {},
-                                                child: Padding(
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 10),
-                                                  child: Row(
-                                                    children: [
-                                                      Text(
-                                                        'Today',
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 22.sp),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                              HoursWidget(
-                                                forcasts: state
+                                                time: Helpers.extractTime(state
                                                         .searchedWeather!
-                                                        .forecast!
-                                                        .forecasts?[0]
-                                                        .hour ??
-                                                    [],
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
+                                                        .location!
+                                                        .localtime ??
+                                                    ''),
+                                              )),
+                                          InfoListWidget(
+                                            cloud: state
+                                                .searchedWeather!.current!.cloud
+                                                .toString(),
+                                            humidity: state.searchedWeather!
+                                                .current!.humidity
+                                                .toString(),
+                                            wind: state.searchedWeather!
+                                                .current!.windKph!
+                                                .toString(),
+                                          ),
+                                          SizedBox(
+                                            height: 20.h,
+                                          ),
+                                          GestureDetector(
+                                            onTap: () => {},
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 10),
+                                              child: Row(
                                                 children: [
                                                   Text(
-                                                    'Forecast',
+                                                    'Today',
                                                     style: TextStyle(
                                                         color: Colors.black,
                                                         fontWeight:
@@ -194,39 +182,68 @@ class _SearchPageState extends State<SearchPage> {
                                                   ),
                                                 ],
                                               ),
-                                              Column(
-                                                children: state.searchedWeather!
-                                                    .forecast!.forecasts!
-                                                    .map((forecast) {
-                                                  return Column(
-                                                    children: [
-                                                      ForecastCard(
-                                                          minTemp: forecast
-                                                              .day!.minTempC
-                                                              .toString(),
-                                                          maxTemp: forecast
-                                                              .day!.maxTempC
-                                                              .toString(),
-                                                          imgUrl: forecast
-                                                                  .day
-                                                                  ?.condition
-                                                                  ?.icon ??
-                                                              '',
-                                                          date: forecast.date ??
-                                                              ''),
-                                                      SizedBox(
-                                                        height: 20.h,
-                                                      )
-                                                    ],
-                                                  );
-                                                }).toList(),
+                                            ),
+                                          ),
+                                          HoursWidget(
+                                            forcasts: state
+                                                    .searchedWeather!
+                                                    .forecast!
+                                                    .forecasts?[0]
+                                                    .hour ??
+                                                [],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Forecast',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 22.sp),
                                               ),
-                                              SizedBox(
-                                                height: 30.h,
-                                              )
                                             ],
+                                          ),
+                                          Column(
+                                            children: state.searchedWeather!
+                                                .forecast!.forecasts!
+                                                .map((forecast) {
+                                              return Column(
+                                                children: [
+                                                  ForecastCard(
+                                                      minTemp: forecast
+                                                          .day!.minTempC
+                                                          .toString(),
+                                                      maxTemp: forecast
+                                                          .day!.maxTempC
+                                                          .toString(),
+                                                      imgUrl: forecast
+                                                              .day
+                                                              ?.condition
+                                                              ?.icon ??
+                                                          '',
+                                                      date:
+                                                          forecast.date ?? ''),
+                                                  SizedBox(
+                                                    height: 20.h,
+                                                  )
+                                                ],
+                                              );
+                                            }).toList(),
+                                          ),
+                                          SizedBox(
+                                            height: 30.h,
                                           )
-                                        : SizedBox()
+                                        ],
+                                      )
+                                    : SizedBox(
+                                        height: 0.75.sh,
+                                        width: 1.sw,
+                                        child: Center(
+                                          child: Text(
+                                              "No Data found for the entered location"),
+                                        ))
                       ]),
                     ));
               },

@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/src/core/utils/helpers.dart';
 import 'package:weather_app/src/features/weather/data/datasource/weather_remote_data_source.dart';
 import 'package:weather_app/src/features/weather/data/repositories/weather_repository_impl.dart';
-import 'package:weather_app/src/features/weather/domain/repositories/weather_repository.dart';
 import 'package:weather_app/src/features/weather/domain/usecases/get_device_location_usecase.dart';
 import 'package:weather_app/src/features/weather/domain/usecases/get_location_by_ip_usecase.dart';
 import 'package:weather_app/src/features/weather/domain/usecases/get_location_permission_usecase.dart';
@@ -33,40 +32,45 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     // TODO: implement initState
     // context.read<WeatherBloc>().add(FetchWeather(city: 'Mumbai'));
-    _determineWeather();
+    getPermission();
     super.initState();
   }
-      Future<void> _determineWeather() async {
-  final locationPermissionGranted = await GetLocationPermissionUseCase().execute();
 
-  if (locationPermissionGranted) {
-    final userLocation = await GetDeviceLocationUseCase().execute();
-     context.read<WeatherBloc>().add(
-      FetchWeather(city: userLocation.city),
-    );
-  } else {
-        final remoteDataSource = WeatherRemoteDataSourceImpl(client: Dio());
+  Future<void> getPermission() async {
+    context.read<WeatherBloc>().add(InitiateProcessEvent());
+    final locationPermissionGranted =
+        await GetLocationPermissionUseCase().execute();
 
-    final weatherRepository = WeatherRepositoryImpl(remoteDataSource: remoteDataSource);
-    final ipLocation = await FetchLocationByIPUseCase(repository: weatherRepository).execute();
-     context.read<WeatherBloc>().add(
-      FetchWeather(city: ipLocation.city),
-    );
+    if (locationPermissionGranted) {
+      final userLocation = await GetDeviceLocationUseCase().execute();
+      context.read<WeatherBloc>().add(
+            FetchWeather(city: userLocation.city),
+          );
+    } else {
+       final remoteDataSource = WeatherRemoteDataSourceImpl(client: Dio());
+
+      final weatherRepository =
+          WeatherRepositoryImpl(remoteDataSource: remoteDataSource);
+      final String city =
+          await FetchLocationByIPUseCase(repository: weatherRepository)
+              .execute();
+      context.read<WeatherBloc>().add(
+            FetchWeather(city: city),
+          );
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding:   EdgeInsets.symmetric(horizontal: 12.w),
+          padding: EdgeInsets.symmetric(horizontal: 12.w),
           child: BlocConsumer<WeatherBloc, WeatherState>(
             listener: (context, state) {
               // TODO: implement listener
-             },
+            },
             builder: (context, state) {
               return BlocBuilder<WeatherBloc, WeatherState>(
                 builder: (context, state) {
@@ -75,53 +79,52 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         const LocationShimmerWidget(),
                         Material(
-                                color: Colors.transparent,
-                                child: InfoCardShimmerWidget()),
+                            color: Colors.transparent,
+                            child: InfoCardShimmerWidget()),
                         InfoListShimmerWidget(),
-                          SizedBox(
+                        SizedBox(
                           height: 40.h,
                         ),
-                          HoursShimmerWidget()
+                        HoursShimmerWidget()
                       ],
                     );
-                  } else if (state.weather!=null){
+                  } else if (state.weather != null) {
                     return SingleChildScrollView(
                       scrollDirection: Axis.vertical,
                       child: Column(
                         children: [
-                           LocationWidget(
+                          LocationWidget(
                             weatherBloc: context.read<WeatherBloc>(),
-                            city: '${state.weather?.location?.name } , ${state.weather?.location?.country}'?? '',
+                            city:
+                                '${state.weather?.location?.name} , ${state.weather?.location?.country}' ??
+                                    '',
                             date: Helpers.formatDate(
                                 state.weather?.location?.localtime ?? ''),
                           ),
-
-                        Material(
-                                  color: Colors.transparent,
-                                  child: InfoCard(
-                                    condition: state
-                                            .weather?.current?.condition?.text ??
+                          Material(
+                              color: Colors.transparent,
+                              child: InfoCard(
+                                condition:
+                                    state.weather?.current?.condition?.text ??
                                         '',
-                                    feelsLike: state.weather!.current!.feelslikeC
-                                        .toString(),
-                                    temp:
-                                        state.weather!.current!.tempC.toString(),
-                                    time: Helpers.extractTime(
-                                        state.weather!.location?.localtime ??
-                                            ''),
-                                  )),
+                                feelsLike: state.weather!.current!.feelslikeC
+                                    .toString(),
+                                temp: state.weather!.current!.tempC.toString(),
+                                time: Helpers.extractTime(
+                                    state.weather!.location?.localtime ?? ''),
+                              )),
                           InfoListWidget(
                             cloud: state.weather!.current!.cloud.toString(),
                             humidity:
                                 state.weather!.current!.humidity.toString(),
                             wind: state.weather!.current!.windKph!.toString(),
                           ),
-                            SizedBox(
+                          SizedBox(
                             height: 20.h,
                           ),
                           GestureDetector(
                             onTap: () => {},
-                            child:   Padding(
+                            child: Padding(
                               padding: EdgeInsets.symmetric(horizontal: 10),
                               child: Row(
                                 children: [
@@ -141,7 +144,7 @@ class _HomePageState extends State<HomePage> {
                                 state.weather!.forecast!.forecasts?[0].hour ??
                                     [],
                           ),
-                            Row(
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
@@ -159,24 +162,29 @@ class _HomePageState extends State<HomePage> {
                               return Column(
                                 children: [
                                   ForecastCard(
-                                      minTemp: forecast.day!.minTempC.toString(),
-                                      maxTemp: forecast.day!.maxTempC.toString(),
-                                      imgUrl: forecast.day?.condition?.icon ?? '',
+                                      minTemp:
+                                          forecast.day!.minTempC.toString(),
+                                      maxTemp:
+                                          forecast.day!.maxTempC.toString(),
+                                      imgUrl:
+                                          forecast.day?.condition?.icon ?? '',
                                       date: forecast.date ?? ''),
-                                        SizedBox(height: 20.h,)
+                                  SizedBox(
+                                    height: 20.h,
+                                  )
                                 ],
                               );
                             }).toList(),
                           ),
-                            SizedBox(
+                          SizedBox(
                             height: 30.h,
                           )
                         ],
                       ),
                     );
-                }  else if (state is WeatherError) {
-                    return   Center(
-                      child: Text(state.weatherError??''),
+                  } else if (state is WeatherError) {
+                    return Center(
+                      child: Text(state.weatherError ?? ''),
                     );
                   }
 

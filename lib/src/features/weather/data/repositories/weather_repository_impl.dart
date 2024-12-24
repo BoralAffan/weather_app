@@ -17,14 +17,12 @@ class WeatherRepositoryImpl extends WeatherRepository {
        final weather = await remoteDataSource.getWeather(city);
       
        return Right(weather);
-    } on ServerException {
-       return Left(ServerFailure(error: 'something went werong'));
-    } catch (e) {
-       return Left(UnexpectedFailure());
+    }   catch (e) {
+       return Right(WeatherModel(location: null, current: null, forecast: null));
     }
   }
    @override
-  Future<IPLocation> fetchLocationByIP() async {
+  Future<String> fetchLocationByIP() async {
     return await remoteDataSource.fetchLocationByIP();
   }
 

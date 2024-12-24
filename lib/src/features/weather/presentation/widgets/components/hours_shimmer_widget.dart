@@ -38,14 +38,12 @@ class HoursShimmerWidget extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // Placeholder for the text
-                        Container(
+                         Container(
                           height: 15,
                           width: 20,
                           color: AppColors.greyColor,
                         ),
-                        // Placeholder for the image/icon
-                        Container(
+                         Container(
                           height: 50,
                           width: 50,
                           decoration: BoxDecoration(
@@ -53,8 +51,7 @@ class HoursShimmerWidget extends StatelessWidget {
                             borderRadius: BorderRadius.circular(25),
                           ),
                         ),
-                        // Placeholder for the temperature text
-                        Container(
+                         Container(
                           height: 15,
                           width: 30,
                           color: AppColors.greyColor,

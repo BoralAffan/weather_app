@@ -55,7 +55,30 @@ class ForecastCard extends StatelessWidget {
                         fontSize: 16.sp),
                   )
                 ])),
-            Image.network('https:${imgUrl}')
+   Image.network(
+  'https:$imgUrl',
+  loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+    if (loadingProgress == null) {
+      return child; // Image is fully loaded
+    }
+    return Center(
+      child: CircularProgressIndicator(
+        backgroundColor: Colors.blue,
+        value: loadingProgress.expectedTotalBytes != null
+            ? loadingProgress.cumulativeBytesLoaded / (loadingProgress.expectedTotalBytes ?? 1)
+            : null,
+      ),
+    );
+  },
+  errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+    return Icon(
+      Icons.image_not_supported,
+      size: 50,
+      color: Colors.black,
+    );
+  },
+)
+
           ],
         ),
       ),

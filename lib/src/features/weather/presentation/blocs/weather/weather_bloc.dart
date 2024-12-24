@@ -27,12 +27,16 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       emit(SearchedWeatherLoading(citySuggestions: state.citySuggestions,searchedWeather: state.searchedWeather,weather: state.weather));
       var weather = await getWeatherUseCase(event.query);
       weather.fold(
-        (error) => emit(SearchedWeatherError(citySuggestions: state.citySuggestions,searchedWeather:state.searchedWeather ,weather: state.weather)),
+        (error) => emit(SearchedWeatherLoaded(citySuggestions: state.citySuggestions,searchedWeather:null ,weather: state.weather,)),
         (success) => emit(SearchedWeatherLoaded(searchedWeather: success,citySuggestions: state.citySuggestions,weather: state.weather)),
       );
     });
     on<RemoveSearchedWeatherData>((event, emit) async {
             emit(WeatherLoaded(weather: state.weather!, citySuggestions: state.citySuggestions,searchedWeather: null));
+
+    });
+       on<InitiateProcessEvent>((event, emit) async {
+            emit(WeatherLoading());
 
     });
 // on<FetchCitySuggestions>((event, emit) async {

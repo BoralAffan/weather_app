@@ -16,7 +16,7 @@ class FetchCitySuggestions extends WeatherEvent {
   FetchCitySuggestions({required this.query});
 }
 
-
+class InitiateProcessEvent extends WeatherEvent{}
 class FetchSearchedWeather extends WeatherEvent {
   final String query;
   FetchSearchedWeather({required this.query});
