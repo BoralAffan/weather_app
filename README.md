@@ -36,4 +36,4 @@ If the user denies location permission, the app will fetch the device's location
 This ensures the app remains functional and retrieves weather data for the IP-based location.
 
 
-On Home Scree:- weather data will be shown of live location of the user and the user can search for cities by tapping on "Browse weather by city " underline text . User can tap on it and can see weather details of any country. 
+On Home Screen:- weather data will be shown of live location of the user and the user can search for cities by tapping on "Browse weather by city " underline text . User can tap on it and can see weather details of any country. 
