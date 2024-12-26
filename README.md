@@ -34,3 +34,6 @@ Ensure location services are enabled and permissions are granted for accurate fu
 Additional Feature: Location Fallback
 If the user denies location permission, the app will fetch the device's location based on its IP address as a fallback mechanism.
 This ensures the app remains functional and retrieves weather data for the IP-based location.
+
+
+On Home Scree:- weather data will be shown of live location of the user and the user can search for cities by tapping on "Browse weather by city " underline text . User can tap on it and can see weather details of any country. 
